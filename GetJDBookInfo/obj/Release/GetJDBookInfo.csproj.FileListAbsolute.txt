@@ -1,0 +1,12 @@
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\bin\Release\GetJDBookInfo.exe.config
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\bin\Release\GetJDBookInfo.exe
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\bin\Release\GetJDBookInfo.pdb
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\bin\Release\HtmlAgilityPack.dll
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\bin\Release\HtmlAgilityPack.pdb
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\bin\Release\HtmlAgilityPack.xml
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\obj\Release\GetJDBookInfo.Form1.resources
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\obj\Release\GetJDBookInfo.Properties.Resources.resources
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\obj\Release\GetJDBookInfo.csproj.GenerateResource.Cache
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\obj\Release\GetJDBookInfo.exe
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\obj\Release\GetJDBookInfo.pdb
+C:\Users\Dev2\Documents\Visual Studio 2013\Projects\GetJDBookInfo\GetJDBookInfo\obj\Release\GetJDBookInfo.csprojResolveAssemblyReference.cache
