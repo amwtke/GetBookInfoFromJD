@@ -9,6 +9,11 @@ using Microsoft.Win32;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.InteropServices;
 using System.Net;
+using System.Web.Script.Serialization;
+using System.Collections.ObjectModel;
+using System.Dynamic;
+using System.Collections;
+
 namespace GetJDBookInfo
 {
     public partial class Form1 : Form
@@ -130,6 +135,95 @@ namespace GetJDBookInfo
             rtx_info.Text = text;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (IsInterNetConnected())
+            {
+                try
+                {
+                    string realUlr = tx_url.Text;
+                    HtmlHelper.HtmlFromWebReq req = new HtmlHelper.HtmlFromWebReq(
+                        realUlr, delegate(byte[] data)
+                        {
+                            //string constructedString = System.Text.Encoding.UTF8.GetString(data);
+                            string constructedString = System.Text.Encoding.UTF8.GetString(data);
+                            SetText(constructedString);
+                            //Object o = JsonConvert.DeserializeObject(constructedString);
+                            //Console.WriteLine(o.ToString());
+
+
+                            JavaScriptSerializer jss = new JavaScriptSerializer();
+                            jss.RegisterConverters(new JavaScriptConverter[] { new DynamicJsonConverter() });
+                            dynamic dy = jss.Deserialize(constructedString, typeof(object)) as dynamic;  
+
+                        });
+
+                    req.BeginCreateHtml();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+                MessageBox.Show("没有互联网！");
+        }
+
     }
 
+    public class DynamicJsonConverter : JavaScriptConverter
+    {
+        public override object Deserialize(IDictionary<string, object> dictionary, Type type, JavaScriptSerializer serializer)
+        {
+            if (dictionary == null)
+                throw new ArgumentNullException("dictionary");
+
+            if (type == typeof(object))
+            {
+                return new DynamicJsonObject(dictionary);
+            }
+
+            return null;
+        }
+
+        public override IDictionary<string, object> Serialize(object obj, JavaScriptSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IEnumerable<Type> SupportedTypes
+        {
+            get { return new ReadOnlyCollection<Type>(new List<Type>(new Type[] { typeof(object) })); }
+        }
+    }
+
+    public class DynamicJsonObject : DynamicObject
+    {
+        private IDictionary<string, object> Dictionary { get; set; }
+
+        public DynamicJsonObject(IDictionary<string, object> dictionary)
+        {
+            this.Dictionary = dictionary;
+        }
+
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            result = this.Dictionary[binder.Name];
+
+            if (result is IDictionary<string, object>)
+            {
+                result = new DynamicJsonObject(result as IDictionary<string, object>);
+            }
+            else if (result is ArrayList && (result as ArrayList) is IDictionary<string, object>)
+            {
+                result = new List<DynamicJsonObject>((result as ArrayList).ToArray().Select(x => new DynamicJsonObject(x as IDictionary<string, object>)));
+            }
+            else if (result is ArrayList)
+            {
+                result = new List<object>((result as ArrayList).ToArray());
+            }
+
+            return this.Dictionary.ContainsKey(binder.Name);
+        }
+    }
 }
