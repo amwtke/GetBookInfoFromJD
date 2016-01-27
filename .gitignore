@@ -1,0 +1,13 @@
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+#*.dll
+*.pdb
+*.cache
+.vs/*
+/Qiniu/bin/*
+/packages/*
+/GetJDBookInfo/bin/*
+/GetJDBookInfo/obj/*
+*.user
+
